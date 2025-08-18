@@ -24,7 +24,7 @@ The goal is to maintain an organized and accessible codebase for **future refere
 <ol>
   <li>
     <strong>Clone the repository:</strong><br>
-    <code>git clone &lt;repo-url&gt;</code>
+    <code>git clone &lt;https://github.com/vinnu112p/Design-of-Analysis---Algorithm.git&gt;</code>
   </li>
   <li>
     <strong>Navigate to the project directory:</strong><br>
