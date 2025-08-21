@@ -54,7 +54,7 @@ public class BreadthFirstSearch {
 
             // If the current vertex has not been visited
             if (!visited[curr]) {
-                System.out.print(curr + " "); // Print the vertex
+                System.out.print(curr + " "); // Print the vertex   
                 visited[curr] = true;         // Mark it as visited
 
                 // Add all adjacent vertices (neighbors) to the queue

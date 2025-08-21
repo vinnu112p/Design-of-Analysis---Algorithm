@@ -31,7 +31,7 @@ public class LeetCode1971 {
         graph[2].add(new Edge(2, 0)); // Edge from 2 to 0
         graph[2].add(new Edge(2, 4)); // Edge from 2 to 4
         graph[3].add(new Edge(3, 1)); // Edge from 3 to 1
-        graph[3].add(new Edge(3, 4)); // Edge from 3 to 4
+        graph[3].add(new Edge(3, 4)); // Edge from 3 to 4   
         graph[3].add(new Edge(3, 5)); // Edge from 3 to 5
         graph[4].add(new Edge(4, 2)); // Edge from 4 to 2
         graph[4].add(new Edge(4, 3)); // Edge from 4 to 3
