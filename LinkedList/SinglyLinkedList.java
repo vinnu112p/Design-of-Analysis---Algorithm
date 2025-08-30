@@ -3,18 +3,40 @@ public class SinglyLinkedList{
     public static void main(String arg[]){
         
         LinkedList bucket = new LinkedList();
-        bucket.Append(7);
-        bucket.Append(8);
-        bucket.Append(10);
-        bucket.InsertAtHead(4);
-        bucket.InsertAtPos(5,1);
+        // bucket.Append(7);
+        // bucket.Append(8);
+        // bucket.Append(10);
+        // bucket.InsertAtHead(4);
+        // bucket.InsertAtPos(5,1);
+        // bucket.show();
+        // bucket.removeNthfromEnd(3);
+        // bucket.show();
+        // bucket.reverse();
+        // bucket.show();
+        // System.out.println(bucket.search(11));
+        // bucket.Append(12);
+        // bucket.RemoveHead();
+        // bucket.RemoveHead();
+        // bucket.RemoveAtPos(1);
+        // bucket.RemoveEnd();
+        // bucket.RemoveEnd();
+        // bucket.show();
+
+        //Palindrome
+
+        bucket.Append(3);
+        bucket.Append(2);
+        bucket.Append(1);
+        // bucket.Append(3);
+        bucket.Append(1);
+        bucket.Append(2);
+        bucket.Append(3);
         bucket.show();
-        bucket.Append(12);
-        bucket.RemoveHead();
-        bucket.RemoveHead();
-        bucket.RemoveAtPos(1);
-        bucket.RemoveEnd();
-        bucket.show();
+        if( bucket.Palindrome()){
+            System.out.println("Palindrome");
+        }else{
+            System.out.println("Not");
+        }
         
     }
 }
@@ -129,6 +151,13 @@ class LinkedList{
             System.out.println("Empty");
             return;
         }
+
+        if (head.next == null) { // Only one node
+        head = null;
+        return;
+    }
+
+        
         
         Node temp = head;
         Node prev = null;
@@ -140,6 +169,112 @@ class LinkedList{
         
         prev.next = null;
         
+    }
+
+
+    int search(int target){
+
+        Node temp = head;
+        int pos = 1;
+        while(temp!= null){
+            if(temp.data == target){
+                return pos;
+            }
+
+            temp = temp.next;
+            pos++;
+        }
+
+        return -1;
+
+    }
+
+    void reverse(){
+
+        
+       Node curr = head;
+       Node prev = null;
+       Node next;
+
+       while(head!=null){
+        next = head.next;
+        head.next = prev;
+        prev = head;
+        head = next;
+       }
+
+       head = prev;
+
+    }
+    void removeNthfromEnd(int n){
+
+        Node temp = head;
+        int size = 0;
+
+        while(temp!= null){
+            temp = temp.next;
+            size++;
+        }
+
+        RemoveAtPos((size-n));
+
+
+
+
+
+    }
+
+    Node findMid(){
+
+         Node slow = head;
+        Node fast = head;
+
+        while(fast!= null  && fast.next!= null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+
+    }
+
+    boolean Palindrome(){
+
+        Node mid = findMid();
+        Node temp = head;
+
+        Node curr = mid;
+        Node prev = null;
+        Node next;
+
+        while(curr!=null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        curr = prev;
+
+        while(temp.next!= null && curr.next!=null){
+            if(temp.data == curr.data){
+
+            temp = temp.next;
+            curr = curr.next;
+            }else{
+                return false;
+            }
+        }
+
+
+       
+       
+
+        
+
+
+
+        return true;
     }
     
     void show(){
