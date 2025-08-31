@@ -1,18 +1,33 @@
+
+
 class DoublyLinkedList {
 
     public static void main(String arg[]) {
         LinkedList list = new LinkedList();
 
+        // list.Append(5);
+        // list.Append(8);
+        // list.InsertAtHead(7);
+        // list.InsertAtPos(10,1);
+        // list.RemoveHead();
+        // list.Append(14);
+        // list.RemoveAtEnd();
+        // list.Append(12);
+        // list.RemoveAtPos(2);
+        // list.display();
+
+        list.Append(1);
+        list.Append(2);
+        list.Append(3);
+        list.Append(4);
         list.Append(5);
-        list.Append(8);
-        list.InsertAtHead(7);
-        list.InsertAtPos(10,1);
-        list.RemoveHead();
-        list.Append(14);
-        list.RemoveAtEnd();
-        list.Append(12);
-        list.RemoveAtPos(2);
+        
         list.display();
+        list.reverse();
+        System.out.println("");
+        list.display();
+
+
 
     }
 }
@@ -152,6 +167,35 @@ class LinkedList {
 
 
         
+    }
+
+
+    public void reverse(){
+
+        if(head == null || head.next == null){
+            return;
+        }
+
+        Node curr = head;
+        Node prev  = null;
+
+        while(curr!= null){
+            Node next = curr.next;
+            curr.next = prev;
+            curr.prev = next;
+
+            prev = curr;
+            curr = curr.prev;
+        }
+
+        head = prev;
+
+        
+
+
+
+
+
     }
 
     void display() {

@@ -1,7 +1,79 @@
-public class SinglyLinkedList{
-    
-    public static void main(String arg[]){
+
+public class SinglyLinkedList {
+
+
+ public static boolean isCycle(Node head){
+
+        Node slow = head;
+        Node fast = head;
+
+        while(fast!= null && fast.next!= null){
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if(slow == fast){
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+
+    public static void breakCycle(Node heads){
+
+        if(!isCycle(heads)){
+            System.out.println("No cycle exist");
+            return;
+        }
+
+        Node slow = heads;
+        Node fast = heads;
+
+        while(fast!= null && fast.next!= null){
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if(slow == fast){
+                 break;
+            }
+        }
+
+        // slow = heads;
+        // Node pre = null;
+
+        // while(slow!= fast){
+        //     pre = fast;
+        //     slow = slow.next;
+        //     fast = fast.next;
+        // }
+        // if(pre!= null){
+
+        // pre.next = null;
+        // }
+
+          // Find the start of the cycle
+    slow = heads;
+    if (slow == fast) {
+        // Cycle starts at head
+        while (fast.next != slow) {
+            fast = fast.next;
+        }
+        fast.next = null;
+    } else {
+        // Cycle starts elsewhere
+        while (slow.next != fast.next) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        fast.next = null;
+    }
         
+    }
+
+    public static void main(String arg[]) {
+
         LinkedList bucket = new LinkedList();
         // bucket.Append(7);
         // bucket.Append(8);
@@ -23,7 +95,6 @@ public class SinglyLinkedList{
         // bucket.show();
 
         //Palindrome
-
         bucket.Append(3);
         bucket.Append(2);
         bucket.Append(1);
@@ -32,152 +103,170 @@ public class SinglyLinkedList{
         bucket.Append(2);
         bucket.Append(3);
         bucket.show();
-        if( bucket.Palindrome()){
+        if (bucket.Palindrome()) {
             System.out.println("Palindrome");
-        }else{
+        } else {
             System.out.println("Not");
         }
+        //Cycle linkedlist
+        Node heads = new Node(1);
+        heads.next = new Node(2);
+        heads.next.next = new Node(3);
+        heads.next.next.next = heads;
+
+        // 1->2->3->1
+        if(isCycle(heads)){
+            System.out.println("Cycle");
+        }
+
+        breakCycle(heads);
+        breakCycle(heads);
+        if(isCycle(heads)){
+            System.out.println("Cycle");
+        }
+
         
+
     }
 }
 
+class Node {
 
-class Node{
     int data;
     Node next;
-    
-    Node(int data){
+
+    Node(int data) {
         this.data = data;
         this.next = null;
     }
 }
 
-class LinkedList{
+
+
+
+class LinkedList {
+
     Node head;
-    void Append(int data){
-        
+
+    void Append(int data) {
+
         Node newNode = new Node(data);
-        if (head == null){
+        if (head == null) {
             head = newNode;
             return;
         }
-        
+
         Node temp = head;
-       
-        while(temp.next!= null){
-          
+
+        while (temp.next != null) {
+
             temp = temp.next;
         }
-        
-        temp.next=  newNode;
-        
+
+        temp.next = newNode;
+
     }
-    
-    void InsertAtHead(int data){
+
+    void InsertAtHead(int data) {
         Node newNode = new Node(data);
-        if (head == null){
+        if (head == null) {
             head = newNode;
             return;
         }
-        
+
         newNode.next = head;
         head = newNode;
-        
+
     }
-    
-    void InsertAtPos(int data,int pos){
+
+    void InsertAtPos(int data, int pos) {
         Node newNode = new Node(data);
-        if (head == null){
+        if (head == null) {
             head = newNode;
             return;
         }
-        
-        if (pos == 0){
+
+        if (pos == 0) {
             InsertAtHead(data);
             return;
         }
-        
+
         int itr = 0;
         Node temp = head;
-        
-        while(itr!= pos-1){
+
+        while (itr != pos - 1) {
             temp = temp.next;
             itr++;
         }
-        
-        
+
         Node temp1 = temp.next;
         temp.next = newNode;
         newNode.next = temp1;
-        
+
     }
-    
-    void RemoveHead(){
-        if(head == null){
+
+    void RemoveHead() {
+        if (head == null) {
             System.out.println("Empty");
             return;
         }
-        
+
         head = head.next;
     }
-    
-    void RemoveAtPos(int pos){
-        
-         if(head == null){
+
+    void RemoveAtPos(int pos) {
+
+        if (head == null) {
             System.out.println("Empty");
             return;
         }
-        
-        if(pos == 0){
+
+        if (pos == 0) {
             RemoveHead();
             return;
         }
-        
+
         Node temp = head;
         int itr = 0;
-        
-        while(itr!= pos-1){
+
+        while (itr != pos - 1) {
             temp = temp.next;
             itr++;
         }
-        
+
         temp.next = temp.next.next;
-        
-        
+
     }
-    
-    void RemoveEnd(){
-        if(head == null){
+
+    void RemoveEnd() {
+        if (head == null) {
             System.out.println("Empty");
             return;
         }
 
         if (head.next == null) { // Only one node
-        head = null;
-        return;
-    }
+            head = null;
+            return;
+        }
 
-        
-        
         Node temp = head;
         Node prev = null;
-        while(temp.next!= null){
+        while (temp.next != null) {
             prev = temp;
             temp = temp.next;
-         
+
         }
-        
+
         prev.next = null;
-        
+
     }
 
-
-    int search(int target){
+    int search(int target) {
 
         Node temp = head;
         int pos = 1;
-        while(temp!= null){
-            if(temp.data == target){
+        while (temp != null) {
+            if (temp.data == target) {
                 return pos;
             }
 
@@ -189,47 +278,43 @@ class LinkedList{
 
     }
 
-    void reverse(){
+    void reverse() {
 
-        
-       Node curr = head;
-       Node prev = null;
-       Node next;
+        Node curr = head;
+        Node prev = null;
+        Node next;
 
-       while(head!=null){
-        next = head.next;
-        head.next = prev;
-        prev = head;
-        head = next;
-       }
+        while (head != null) {
+            next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
 
-       head = prev;
+        head = prev;
 
     }
-    void removeNthfromEnd(int n){
+
+    void removeNthfromEnd(int n) {
 
         Node temp = head;
         int size = 0;
 
-        while(temp!= null){
+        while (temp != null) {
             temp = temp.next;
             size++;
         }
 
-        RemoveAtPos((size-n));
-
-
-
-
+        RemoveAtPos((size - n));
 
     }
 
-    Node findMid(){
+    Node findMid() {
 
-         Node slow = head;
+        Node slow = head;
         Node fast = head;
 
-        while(fast!= null  && fast.next!= null){
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -238,7 +323,7 @@ class LinkedList{
 
     }
 
-    boolean Palindrome(){
+    boolean Palindrome() {
 
         Node mid = findMid();
         Node temp = head;
@@ -247,7 +332,7 @@ class LinkedList{
         Node prev = null;
         Node next;
 
-        while(curr!=null){
+        while (curr != null) {
             next = curr.next;
             curr.next = prev;
             prev = curr;
@@ -256,34 +341,27 @@ class LinkedList{
 
         curr = prev;
 
-        while(temp.next!= null && curr.next!=null){
-            if(temp.data == curr.data){
+        while (temp.next != null && curr.next != null) {
+            if (temp.data == curr.data) {
 
-            temp = temp.next;
-            curr = curr.next;
-            }else{
+                temp = temp.next;
+                curr = curr.next;
+            } else {
                 return false;
             }
         }
 
-
-       
-       
-
-        
-
-
-
         return true;
     }
-    
-    void show(){
+
+   
+
+    void show() {
         Node temp = head;
-        while(temp!= null){
+        while (temp != null) {
             System.out.print(temp.data + "-->");
-            temp = temp.next;     
-            }
-            System.out.println("Null");
+            temp = temp.next;
+        }
+        System.out.println("Null");
     }
 }
-
