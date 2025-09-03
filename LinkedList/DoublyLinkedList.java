@@ -1,5 +1,4 @@
 
-
 class DoublyLinkedList {
 
     public static void main(String arg[]) {
@@ -15,19 +14,16 @@ class DoublyLinkedList {
         // list.Append(12);
         // list.RemoveAtPos(2);
         // list.display();
-
         list.Append(1);
         list.Append(2);
         list.Append(3);
         list.Append(4);
         list.Append(5);
-        
+
         list.display();
         list.reverse();
         System.out.println("");
         list.display();
-
-
 
     }
 }
@@ -68,9 +64,9 @@ class LinkedList {
 
     }
 
-    void InsertAtHead(int data){
+    void InsertAtHead(int data) {
 
-          Node newNode = new Node(data);
+        Node newNode = new Node(data);
 
         if (head == null) {
             head = newNode;
@@ -80,28 +76,27 @@ class LinkedList {
         newNode.next = head;
         head.prev = newNode;
         head = newNode;
-       
 
     }
 
-    void InsertAtPos(int data,int pos){
+    void InsertAtPos(int data, int pos) {
 
         Node newNode = new Node(data);
 
-        if(head == null){
+        if (head == null) {
             head = newNode;
             return;
         }
 
-        if(pos == 0){
+        if (pos == 0) {
             InsertAtHead(data);
-            
+
         }
 
         Node temp = head;
         int itr = 0;
 
-        while(itr!=  pos){
+        while (itr != pos) {
             temp = temp.next;
             itr++;
         }
@@ -113,10 +108,10 @@ class LinkedList {
 
     }
 
-    void RemoveHead(){
-        if (head == null){
+    void RemoveHead() {
+        if (head == null) {
             System.out.println("Empty");
-            
+
         }
 
         head = head.next;
@@ -124,15 +119,15 @@ class LinkedList {
 
     }
 
-    void RemoveAtEnd(){
+    void RemoveAtEnd() {
 
-        if (head == null){
+        if (head == null) {
             System.out.println("Empty");
-            
-        } 
+
+        }
 
         Node temp = head;
-        while(temp.next!= null){
+        while (temp.next != null) {
             temp = temp.next;
 
         }
@@ -141,21 +136,21 @@ class LinkedList {
 
     }
 
-    void RemoveAtPos(int pos){
+    void RemoveAtPos(int pos) {
 
-            if (head == null){
+        if (head == null) {
             System.out.println("Empty");
-            
-        } 
 
-        if(pos == 0){
+        }
+
+        if (pos == 0) {
             RemoveHead();
         }
-        
+
         Node temp = head;
         int itr = 0;
 
-        while(itr!= pos){
+        while (itr != pos) {
             temp = temp.next;
             itr++;
         }
@@ -163,23 +158,18 @@ class LinkedList {
         temp.prev.next = temp.next;
         temp.next.prev = temp.prev;
 
-
-
-
-        
     }
 
+    public void reverse() {
 
-    public void reverse(){
-
-        if(head == null || head.next == null){
+        if (head == null || head.next == null) {
             return;
         }
 
         Node curr = head;
-        Node prev  = null;
+        Node prev = null;
 
-        while(curr!= null){
+        while (curr != null) {
             Node next = curr.next;
             curr.next = prev;
             curr.prev = next;
@@ -189,12 +179,6 @@ class LinkedList {
         }
 
         head = prev;
-
-        
-
-
-
-
 
     }
 
