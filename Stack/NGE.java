@@ -4,6 +4,7 @@ public class NGE {
 
 public static void ngestack(int arr[], int nge[]){
     Stack<Integer> s = new Stack<>();
+    
 
     for(int  i = arr.length-1; i >= 0; i--){
 
