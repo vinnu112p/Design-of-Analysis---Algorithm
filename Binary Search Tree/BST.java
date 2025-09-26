@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class BST {
 
     static class Node {
@@ -99,6 +99,47 @@ public class BST {
         }
     }
 
+    public static void Printroot2leaf(Node root, ArrayList<Node> path){
+
+        if(root == null){
+            return;
+        }
+        path.add(root);
+
+        if(root.left == null && root.right == null){
+            for(int i = 0; i < path.size(); i++){
+                System.out.print(path.get(i).data + " ");
+            }
+           
+            System.out.println("");
+            return;
+        }
+
+        Printroot2leaf(root.left, path);
+        Printroot2leaf(root.right, path);
+         path.remove(path.size() -1);
+
+
+
+    }
+
+
+    public static boolean isValid(Node root, Node min, Node max){
+
+        if(root == null){
+            return true;
+        }
+
+        if(min!= null && root.data <= min.data){
+            return false;
+        }else if(max!= null && root.data >= max.data){
+            return false;
+        }
+
+        return isValid(root.left, min, root) && isValid(root.right, root, max);
+
+    }
+
     public static void Inorder(Node root) {
         if (root == null) {
             return;
@@ -112,7 +153,8 @@ public class BST {
 
     public static void main(String[] args) {
 
-        int arr[] = {5, 1, 3, 4, 2, 7};
+        // int arr[] = {5, 1, 3, 4, 2, 7};
+        int arr[] = {8,5,3,1,4,6,10,11,14};
         Node root = null;
         for (int i : arr) {
             root = buildbst(root, i);
@@ -131,6 +173,15 @@ public class BST {
 
         root = delete(root, 3);
         Inorder(root);
+        System.out.println("");
+
+        ArrayList<Node> path = new ArrayList<>();
+        System.out.println("Root to leaf Paths");
+        Printroot2leaf(root, path);
+
+        if(isValid(root, null, null)){
+            System.out.println("Valid BST");
+        }
         
     }
 
