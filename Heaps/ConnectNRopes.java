@@ -8,8 +8,8 @@ public class ConnectNRopes{
 
     public static void main(String[] args) {
         
-        int ropes[] = {2,3,3,4,6};
-        // int ropes[] = {4,3,2,6};
+        // int ropes[] = {2,3,3,4,6};
+        int ropes[] = {4,3,2,6};
         int ans  = 0;
 
         PriorityQueue<Integer> pq = new PriorityQueue<>();
