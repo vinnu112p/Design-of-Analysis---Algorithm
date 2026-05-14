@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /*
     Visual Structure of the Graph (Adjacency List):
@@ -38,6 +40,66 @@ class AdjacencyList {
         }
     }
 
+    public static void  bfs(int st, ArrayList<Edge>[] graph, int V){
+
+        Queue<Integer> queue = new LinkedList<>();
+        boolean vis[] = new boolean[V];
+
+        queue.offer(st);
+        vis[st] = true;
+
+        while(queue.size() > 0){
+            int curr = queue.peek();
+            queue.poll();
+
+            System.out.print(curr + " ");
+
+            for(Edge e : graph[curr]){
+
+                if(!vis[e.des]){
+                    vis[e.des] = true;
+                    queue.offer(e.des);
+                }
+            }
+        }
+
+
+    }
+
+    public static void dfs(ArrayList<Edge>[] graph, int curr, boolean visi[] ){
+
+        System.out.print(curr+ " ");
+        visi[curr] = true;
+
+        for(int i = 0; i < graph[curr].size(); i++){
+            Edge e = graph[curr].get(i);
+            if(!visi[e.des]){
+                dfs(graph,e.des,visi);
+            }
+        }
+
+    }
+
+    public static boolean hasPath(ArrayList<Edge>[] graph, int src, int des, boolean vist[]){
+
+        if(src == des){
+            return true;
+        }
+
+        vist[src] = true;
+
+        for(int i = 0; i < graph[src].size(); i++){
+            Edge e = graph[src].get(i);
+
+            if(!vist[e.des] && hasPath(graph, e.des, des, vist)){
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
     @SuppressWarnings("unchecked") // Suppresses unchecked cast warning for generic array
     public static void main(String[] args) {
 
@@ -74,6 +136,17 @@ class AdjacencyList {
 
         }
 
+        System.out.println("");
+        bfs(0,graph,V);
+
+        System.out.println("");
+
+        boolean visi[] = new boolean[V];
+        dfs(graph,0,visi);
+
+        System.out.println("");
+        boolean vist[] = new boolean[V];
+        System.out.println(hasPath(graph, 0, 4, vist));
     }
 
 }
